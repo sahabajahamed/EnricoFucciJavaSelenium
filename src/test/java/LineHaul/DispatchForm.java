@@ -9,9 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import java.awt.AWTException;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -22,8 +24,8 @@ public class DispatchForm {
 	String msg = "AVR has been successfully inserted";
 
 // Initializing driver & Closing after task executed
-@BeforeMethod	
-	public void OpenBrowser()
+@BeforeSuite	
+	public void OpenBrowser() throws InterruptedException, AWTException
 	{
 //	ChromeOptions options = new ChromeOptions();
 //	options.addArguments("--headless");
@@ -32,14 +34,15 @@ public class DispatchForm {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	
 		driver.get("https://dev-test.groundmetrx.com/company/login");
 		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("DHL@123456");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 	}
 	
-@AfterMethod (enabled=false)
+@AfterSuite (enabled=false)
   public void Closebrowser()
   {
 	driver.quit();

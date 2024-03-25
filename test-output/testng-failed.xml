@@ -5,8 +5,8 @@
     <classes>
       <class name="MavenTest.Test.TESTNG">
         <methods>
-          <include name="SearchByDateDispatch"/>
           <include name="Closebrowser"/>
+          <include name="ShowTableDatabySearch"/>
           <include name="OpenBrowser"/>
         </methods>
       </class> <!-- MavenTest.Test.TESTNG -->

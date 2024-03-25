@@ -1,4 +1,4 @@
-package MavenTest.Test;
+package LineHaul;
 
 import java.time.Duration;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TESTNG {
+public class DispatchForm {
 	
 	WebDriver driver;
 	String msg = "AVR has been successfully inserted";
@@ -25,6 +25,10 @@ public class TESTNG {
 @BeforeMethod	
 	public void OpenBrowser()
 	{
+//	ChromeOptions options = new ChromeOptions();
+//	options.addArguments("--headless");
+	
+	
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -32,7 +36,7 @@ public class TESTNG {
 		driver.get("https://dev-test.groundmetrx.com/company/login");
 		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("DHL@123456");
-		driver.findElement(By.xpath("//button[@class='btn full-btn']")).click();
+		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 	}
 	
 @AfterMethod (enabled=false)
@@ -46,34 +50,34 @@ public class TESTNG {
 
 
 
-@Test
+@Test 
 public void AddDispatchviaAdmin() 
 {
 	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Add New Record']")).click();
 	driver.findElement(By.id("created_date")).click();
-	driver.findElement(By.xpath("//a[@data-date='22']")).click();            //Dynamic data
+	driver.findElement(By.xpath("//a[@data-date='22']")).click();//////////////Dynamic data
 	driver.findElement(By.name("created_time")).sendKeys("16:00");           //Dynamic data
 	driver.findElement(By.name("driver_name")).sendKeys("James Anderson");   //Dynamic data
 	driver.findElement(By.xpath("//div[@class='ui-menu-item-wrapper' and text()='James Anderson']")).click();       //Dynamic data
 	
-	driver.findElement(By.id("tractor_number")).sendKeys("2323");       //Dynamic data
+	driver.findElement(By.id("tractor_number")).sendKeys("2323");///////////////////Dynamic data
 	
 	driver.findElement(By.id("dispatch_from")).sendKeys("21");
 		Select DFs = new Select(driver.findElement(By.id("dispatch_from_type")));
-	DFs.selectByVisibleText("Terminal");                                          //Dynamic data
+	DFs.selectByVisibleText("Terminal");                ///////////////////////////Dynamic data
 	
 	
 	driver.findElement(By.id("dispatch_to")).sendKeys("55");
 	Select DTs = new Select(driver.findElement(By.id("dispatch_to_type")));
-	DTs.selectByVisibleText("Spot");                                           //Dynamic data
+	DTs.selectByVisibleText("Spot");                /////////////////////////////Dynamic data
 	
 	
 	driver.findElement(By.name("trailer_1")).sendKeys("1245");
 	driver.findElement(By.name("trailer_2")).sendKeys("5421");
 	
-	driver.findElement(By.name("start_mileage")).sendKeys("2");                //Dynamic data
+	driver.findElement(By.name("start_mileage")).sendKeys("2");////////////////////Dynamic data
 	driver.findElement(By.id("avr_submit_btn")).click();
 	
 	
@@ -104,7 +108,7 @@ public void SearchByDateDispatch()
    driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click(); 	
    driver.findElement(By.id("daterange")).click();
    WebElement apply =  driver.findElement(By.id("daterange"));
-   apply.sendKeys("04/01/2024 - 05/30/2024");                   //Dynamic data
+   apply.sendKeys("03/01/2024 - 03/30/2024");///////////////////////////////Dynamic data
    apply.sendKeys(Keys.ENTER);
   
 }
@@ -144,9 +148,8 @@ public void SearchByDateDispatch()
   
   }
   
-  // cpmme
   
-  
+  //v
   
   
   

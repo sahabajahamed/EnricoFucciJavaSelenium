@@ -1,6 +1,7 @@
 package LineHaul;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -8,9 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import java.awt.AWTException;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -25,16 +25,21 @@ public class DispatchForm {
 
 // Initializing driver & Closing after task executed
 @BeforeSuite	
-	public void OpenBrowser() throws InterruptedException, AWTException
+	public void OpenBrowser() 
 	{
 //	ChromeOptions options = new ChromeOptions();
 //	options.addArguments("--headless");
 	
-	
+		// WebDriverManager.safaridriver().setup();
+		// driver = new SafariDriver();	
+
+
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+
+
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev-test.groundmetrx.com/company/login");
 		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
@@ -110,9 +115,7 @@ public void SearchByDateDispatch()
    driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
    driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click(); 	
    driver.findElement(By.id("daterange")).click();
-   WebElement apply =  driver.findElement(By.id("daterange"));
-   apply.sendKeys("03/01/2024 - 03/30/2024");///////////////////////////////Dynamic data
-   apply.sendKeys(Keys.ENTER);
+   WebElement apply =  driver.findElement(By.id("daterange"));   apply.sendKeys("03/01/2024 - 03/30/2024");///////////////////////////////Dynamic data   apply.sendKeys(Keys.ENTER);
   
 }
 
@@ -124,15 +127,17 @@ public void SearchByDateDispatch()
   @Test
   public void ShowTableDatabySearch() 
   {
-	  	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
-		driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
-//		driver.findElement(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys("wasim");	  // Search by keyword
+	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
+	driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
+
+	//driver.findElement(By.xpath("//input[@class='form-control form-control-sm']")).sendKeys("wasim");	  // Search by keyword
 		
 //		 Select SL = new Select(driver.findElement(By.name("drivers_list_table_length")));      //Select table length         
 //		 SL.selectByIndex(0);
 		
 		WebElement table = driver.findElement(By.xpath("/html/body/main/div/div/div/div[2]/div[2]/div[6]/div/div[2]/table/tbody"));
-		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		List<WebElement> rows = new ArrayList<WebElement>();
+		rows = table.findElements(By.tagName("tr"));
 		 for (WebElement row : rows) {
 	            // Get all columns for each row
 	            List<WebElement> columns = row.findElements(By.tagName("td"));

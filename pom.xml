@@ -48,5 +48,11 @@
 </dependency>
 
     
+  
+    <dependency>
+      <groupId>com.propensive</groupId>
+      <artifactId>tarantula-core</artifactId>
+      <version>0.3.0</version>
+    </dependency>
   </dependencies>
 </project>

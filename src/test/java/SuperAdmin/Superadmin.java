@@ -41,7 +41,7 @@ public class Superadmin {
     }
 
 
-    @AfterSuite 
+    @AfterSuite (enabled = false)
   public void Closebrowser()
   {
 	driver.quit();
@@ -55,5 +55,12 @@ public class Superadmin {
     public void AddNewCompany()
     {
         driver.findElement(By.xpath("//a[normalize-space()='Companies']")).click();
+        driver.findElement(By.id("addCompanyModal")).click();
+        driver.findElement(By.id("name")).sendKeys("Flipkart");
+        driver.findElement(By.id("email")).sendKeys("payd@yopmail.com"); 
+        driver.findElement(By.id("companyAdminUsername")).sendKeys("Comadmin");
+        driver.findElement(By.id("phone")).sendKeys("8563214521");
+        driver.findElement(By.xpath("//input[@id='submitCompanyModalBtn']")).click();
+
     }
 }

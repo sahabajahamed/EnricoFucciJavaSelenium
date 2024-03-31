@@ -2,19 +2,26 @@ package SuperAdmin;
 
 import java.time.Duration;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.idealized.Javascript;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.bytebuddy.utility.RandomString;
 
 public class Superadmin {
 
     WebDriver driver;
+    
 
+    
 
     @BeforeSuite
     public void OpenBrowser()
@@ -60,7 +67,10 @@ public class Superadmin {
         driver.findElement(By.id("email")).sendKeys("payd@yopmail.com"); 
         driver.findElement(By.id("companyAdminUsername")).sendKeys("Comadmin");
         driver.findElement(By.id("phone")).sendKeys("8563214521");
-        driver.findElement(By.xpath("//input[@id='submitCompanyModalBtn']")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('submitCompanyModalBtn').click()");
+        
+
 
     }
 }

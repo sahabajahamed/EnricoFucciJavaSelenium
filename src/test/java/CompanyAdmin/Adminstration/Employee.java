@@ -2,6 +2,7 @@ package CompanyAdmin.Adminstration;
 
 import java.time.Duration;
 import java.util.List;
+
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -9,13 +10,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.testsigma.sdk.WebElement;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -70,12 +71,28 @@ public void employee_First_Name_Sorting()
     List <org.openqa.selenium.WebElement> list=driver.findElements(By.xpath("//div[@id='activetab']//div[@class='common-listing-table']//tr/td[4]"));
     List <String >collectList=list.stream().map(s->s.getText()).collect(Collectors.toList());
     System.out.println(collectList);
-    List <String>newList=collectList.stream().sorted().collect(Collectors.toList());
-   
- 
+    List <String>newList=collectList.stream().sorted().collect(Collectors.toList());  
 
+}
 
-    
+@Test
+public  void employee_Last_Name_Sorting()
+{
+//     //div[@id='activetab']//div[@class='common-listing-table']//tr/td[13]
+//    driver.findElement(By.xpath("//a[normalize-space()='Administration']")).click();
+// 		driver.findElement(By.xpath(" //a[normalize-space()='Employees']")).click();
+// 		List<WebElement> list = driver.findElements(By.xpath("//div[@id='activetab']//div[@class='common-listing-table']//tr/td[13]"));
+// 		for (WebElement webElement : list) {
+// 			webElement.click();
+
+// 			Select select = new Select(driver.findElement(By.xpath("//select[@id='swal2-select']")));
+// 			select.deselectByVisibleText("Terminated");
+// 			driver.findElement(By.xpath("//button[normalize-space()='Update']")).click();
+// 			WebElement mesge = driver.findElement(By.xpath("//div[@id='swal2-html-container']"));
+// 			String expectedMessage = mesge.getText();
+// 			String actual_message="The Driver has been updated successfully";
+// 			Assert.assertEquals(expectedMessage, actual_message);
 
 }
 }
+

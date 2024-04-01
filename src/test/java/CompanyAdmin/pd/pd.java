@@ -1,4 +1,4 @@
-package CompanyAdmin.pd;
+package CompanyAdmin.PD;
 
 public class pd {
     

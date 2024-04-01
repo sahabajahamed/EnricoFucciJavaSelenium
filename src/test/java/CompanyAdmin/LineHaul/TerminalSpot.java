@@ -25,7 +25,8 @@ public class TerminalSpot extends Data
     WebDriver driver;
 	String msg = "AVR has been successfully inserted";
 
-	static int RanTermi = Data.getRandomNumber();
+	static int RanTermi = Data.getRandomTerminalNumber();
+	static long RanPhone = Data.getRandomPhoneNumber();
 
 // Initializing driver & Closing after task executed
 @BeforeSuite	
@@ -56,25 +57,31 @@ public class TerminalSpot extends Data
 
 
     @Test
-    public void AddTerminal()
+    public void AddTerminal() throws InterruptedException
     {   
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 		driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
 		driver.findElement(By.linkText("Add New Terminal")).click();
 
+		WebElement location = driver.findElement(By.id("terminal_address")); //
+		location.sendKeys(RandTerminalStr);
+		Thread.sleep(4000);
+		location.sendKeys(Keys.ARROW_DOWN);
+		location.sendKeys(Keys.ENTER);
+
 		driver.findElement(By.id("terminal_number")).sendKeys(Integer.toString(RanTermi));
-		driver.findElement(By.id("terminal_name")).sendKeys(Data.Term + Data.str); 
-        driver.findElement(By.id("abbreviation")).sendKeys(Data.str);
-		driver.findElement(By.id("email")).sendKeys("tdemo@yopmail.com");
-		driver.findElement(By.id("phone")).sendKeys("7456378293");
-		driver.findElement(By.id("terminal_address")).sendKeys("pawn");
-		// driver.findElement(By.xpath("//button[@class='w-100 btn btn-primary']")).click();
+		driver.findElement(By.id("terminal_name")).sendKeys(TerminalName + RandTerminalStr); 
+        driver.findElement(By.id("abbreviation")).sendKeys(RandTerminalStr);
+		driver.findElement(By.id("email")).sendKeys(RandTerminalEmail + TerminalEmail);
+		driver.findElement(By.id("phone")).sendKeys(Long.toString(RanPhone));
+
+		driver.findElement(By.xpath("//button[@class='w-100 btn btn-primary']")).click();
 		
 		
     }
     
 	public static void main(String[] args) {
-		System.out.println(Integer.toString(RanTermi));
+		System.out.println(RandTerminalStr);
 		
 	}
 

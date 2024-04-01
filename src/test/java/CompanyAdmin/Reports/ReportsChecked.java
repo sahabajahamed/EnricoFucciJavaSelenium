@@ -163,7 +163,40 @@ public void userVerified_Settalment_No_Revenue()
     
 
 }
+@Test 
+public void userVerified_Dsw_Tracker()
+{
+    driver.findElement(By.xpath("//a[normalize-space()='Reports']")).click();
+    WebElement dswTracker=driver.findElement(By.xpath("//a[@href='/pnd-dsw-tracker']//div[@class='inn-content']"));
+    dswTracker.click();
+    String expectedResult= dswTracker.getText();
+    String actualtittle ="DSW Tracker";
+    Assert.assertEquals(actualtittle, expectedResult);
 
+}
+
+@Test
+    public void userVerfied_Revenue_By_report()
+    {
+        driver.findElement(By.xpath("//a[normalize-space()='Reports']")).click();
+        WebElement revenueByReport= driver.findElement(By.xpath("//a[@href='/reports/revenue-by-route']//div[@class='inn-content']"));
+        revenueByReport.click();
+        String ExpectedResult=revenueByReport.getText();
+        String ActualResult="Revenue By Routes";
+        Assert.assertEquals(ActualResult, ExpectedResult);
+
+
+    }
+    @Test
+    public void userVerfied_PD_Profitabilty_Report()
+    {
+        driver.findElement(By.xpath("//a[normalize-space()='Reports']")).click();
+        WebElement report =driver.findElement(By.xpath("//a[@href='/reports/pnd-profitability-report']//div[@class='inn-content']"));
+        report.click();
+        String ExpectedResult=report.getText();
+        String ActualResult="P&D Profitabilty Report";
+        Assert.assertEquals(ActualResult, ExpectedResult);
+    }
 
 
 }

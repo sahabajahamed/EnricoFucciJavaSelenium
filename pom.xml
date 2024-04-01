@@ -48,17 +48,5 @@
 </dependency>
 
     
-  
-    <dependency>
-      <groupId>com.propensive</groupId>
-      <artifactId>tarantula-core</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-      
-    <dependency>
-      <groupId>com.testsigma</groupId>
-      <artifactId>testsigma-sdk</artifactId>
-      <version>1.0.1</version>
-    </dependency>
   </dependencies>
 </project>

@@ -2,19 +2,26 @@ package SuperAdmin;
 
 import java.time.Duration;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.idealized.Javascript;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.bytebuddy.utility.RandomString;
 
 public class Superadmin {
 
     WebDriver driver;
+    
 
+    
 
     @BeforeSuite
     public void OpenBrowser()
@@ -41,7 +48,7 @@ public class Superadmin {
     }
 
 
-    @AfterSuite 
+    @AfterSuite (enabled = false)
   public void Closebrowser()
   {
 	driver.quit();
@@ -55,5 +62,15 @@ public class Superadmin {
     public void AddNewCompany()
     {
         driver.findElement(By.xpath("//a[normalize-space()='Companies']")).click();
+        driver.findElement(By.id("addCompanyModal")).click();
+        driver.findElement(By.id("name")).sendKeys("Flipkart");
+        driver.findElement(By.id("email")).sendKeys("payd@yopmail.com"); 
+        driver.findElement(By.id("companyAdminUsername")).sendKeys("Comadmin");
+        driver.findElement(By.id("phone")).sendKeys("8563214521");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('submitCompanyModalBtn').click()");
+        
+
+
     }
 }

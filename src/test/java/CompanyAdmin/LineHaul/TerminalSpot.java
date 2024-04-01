@@ -77,7 +77,7 @@ public class TerminalSpot extends Data
 
 		driver.findElement(By.xpath("//button[@class='w-100 btn btn-primary']")).click();
 		
-		
+		//dhs
     }
     
 	public static void main(String[] args) {

@@ -46,7 +46,7 @@ public class VechicleSummary {
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 	}
 	
-@AfterSuite 
+@AfterSuite (enabled = false)
   public void Closebrowser()
   {
 	driver.quit();
@@ -56,7 +56,7 @@ public class VechicleSummary {
 
 
   @Test
-  public void AddAsets()
+  public void AddAssets()
   {
     driver.findElement(By.xpath("//a[normalize-space()='Assets']")).click();
     driver.findElement(By.xpath("//a[normalize-space()='Vehicle Summary']")).click();

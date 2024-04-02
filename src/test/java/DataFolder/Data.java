@@ -26,7 +26,7 @@ public class Data {
     public static long getRandomPhoneNumber()
     {
         Random rand1 = new Random();
-        return rand1.nextLong(1000000000l, 10000000000l); // Adjust range as needed
+        return rand1.nextLong(1000000000L, 9999999999L); // Adjust range as needed
     }
 
 

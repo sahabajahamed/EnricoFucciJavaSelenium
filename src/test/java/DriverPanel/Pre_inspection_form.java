@@ -2,9 +2,6 @@ package DriverPanel;
 
 import java.time.Duration;
 import java.util.List;
-
-import javax.swing.Action;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -13,15 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-import junit.framework.Test;
+
 
 public class Pre_inspection_form {
     WebDriver driver;
@@ -48,8 +41,8 @@ public class Pre_inspection_form {
 @AfterMethod ()
 public void closedBrowser()
 {
-    driver.findElement(By.xpath("//button[@id='end_your_day_btn']")).click();
-    driver.findElement(By.xpath("//button[normalize-space()='Clock out']")).click();
+    // driver.findElement(By.xpath("//button[@id='end_your_day_btn']")).click();
+    // driver.findElement(By.xpath("//button[normalize-space()='Clock out']")).click();
     driver.quit();
 
 }
@@ -97,7 +90,6 @@ public void Pre_inspection_form_fillUp()throws Exception
     }
     Thread.sleep(2000);
     driver.findElement(By.xpath("//div[@class='card-footer parent_footer_4']//input[@value='Check']")).click();
-    Thread.sleep(2000);
     List <WebElement> list_OperationalChecks= driver.findElements(By.xpath("//div[@class='indivudial_card_item card_field_list_4']//button[@class='btn field_success_btn']"));
     for (WebElement webElement : list_OperationalChecks) 
     {
@@ -105,42 +97,74 @@ public void Pre_inspection_form_fillUp()throws Exception
         webElement.click();
         
     }
-
+    //scroll up
     Thread.sleep(2000);
     js.executeScript("window.scrollTo(0, 0)");
     Thread.sleep(2000);
 
+    String imagPath="/home/wadmin/EnricoFucciJavaSelenium/src/test/java/Image/Screenshot.png";
+    //Odometer - Enter Mileage (Image Required)
+
+    driver.findElement(By.xpath("//span[normalize-space()='Add File Dash']/following-sibling::input")).sendKeys(imagPath); 
+    Thread.sleep(3000);
+    driver.findElement(By.xpath("//input[@placeholder='Enter Mileage']")).sendKeys("100");
+    driver.findElement(By.xpath("//input[@class='photo_form_submit add_mileage_card']")).click();
+    driver.findElement(By.xpath("//button[normalize-space()='Pass']")).click();
     
-    String imagePath="/home/wadmin/EnricoFucciJavaSelenium/src/test/java/Image/Screenshot.png";
+    //Engine Compartment Issues or Damage Images to Upload
     Thread.sleep(2000);
-    WebElement image=driver.findElement(By.xpath("//label[@data-card-id='37']"));
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    driver.findElement(By.xpath("//div[@class='card mt-4 parent_card_39']//span[@class='title'][normalize-space()='Add File Dash']/following-sibling::input")).sendKeys(imagPath);
+    Thread.sleep(3000);
+    driver.findElement(By.name("card_comments[39]")).sendKeys("Issues or Damage Images to Upload");
+    Thread.sleep(3000);
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    driver.findElement(By.xpath("(//input[@value='Ok'])[30]")).click();
+    driver.findElement(By.xpath("//button[normalize-space()='Pass']")).click();
+    Thread.sleep(3000);
+
+    //Is the Fire Extinguisher Fully Charged radio button 
+
+    driver.findElement(By.xpath("(//input[@id='multichoise_42'])[1]")).click();
+    js.executeScript("window.scrollTo(0, 0)");
+
+    //Message on the Dash Display
+    Thread.sleep(3000);
+    driver.findElement(By.xpath("//div[@class='card mt-4 parent_card_38']//span[@class='title'][normalize-space()='Add File Dash']/following-sibling::input[@name='image']")).sendKeys(imagPath);
+    Thread.sleep(3000);
+    driver.findElement(By.name("card_comments[38]")).sendKeys("Message on the Dash Display");
+    driver.findElement(By.cssSelector("div[class='card mt-4 parent_card_38'] input[value='Ok']")).click();
+    driver.findElement(By.xpath("//button[normalize-space()='Fail']")).click();
+    Thread.sleep(3000);
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+    //Does truck have any other issues not mentioned? If yes take picture of damage and write comment. Skip if no
+    Thread.sleep(3000);
+    driver.findElement(By.xpath("//input[@class='photo_form_submit add_photo_comment_optional_card']")).click();
+    driver.findElement(By.xpath("//button[normalize-space()='Pass']")).click();
+    Thread.sleep(3000);
+
+    //Please Sign perform
+    WebElement signature=driver.findElement(By.xpath("//canvas[@id='signature_canvas']"));
+    Actions act= new Actions(driver);
+    Thread.sleep(3000);
+    act.clickAndHold(signature).moveByOffset(50, 50).perform();
+    act.moveByOffset(100, 0).moveByOffset(0, 100).moveByOffset(-100, 0).moveByOffset(0, -100).release().perform();
+
+    Thread.sleep(3000);
+    driver.findElement(By.xpath("//input[@id='submit_signature']")).click();
+    
+    //scroll up & click on Save button 
+    Thread.sleep(3000);
+    js.executeScript("window.scrollTo(0, 0)");
     Thread.sleep(2000);
-    image.sendKeys(imagePath);
-    
-    // Actions act= new Actions(driver) ;
-    // act.moveToElement(image).click().build().perform();
-    // Robot rb = new Robot();
-    // rb.delay(2000);
-    //  StringSelection ss=new StringSelection("/home/wadmin/EnricoFucciJavaSelenium/src/test/java/Image/Screenshot.png");
-    //  Toolkit.getDefaultToolkit().getSystemClipboard().getContents(ss);
-    //  rb.keyPress(KeyEvent.VK_CONTROL);
-    //  rb.keyPress(KeyEvent.VK_V);
+    driver.findElement(By.xpath("//button[@class='btn save_btn desktop_submit_btn']")).click();
 
-    //  rb.keyRelease(KeyEvent.VK_CONTROL);
-    //  rb.keyRelease(KeyEvent.VK_V);
-
-    //  rb.keyPress(KeyEvent.VK_ENTER);
-    //  rb.keyRelease(KeyEvent.VK_ENTER);
-
-    
-
-
-  
-
-   
-
-        
-    
+    //Verified pre-form submit or not 
+    WebElement message =driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
+    String expectedMessage=message.getText();
+    String actualMessage="Pre form Submitted Successfully";
+    Assert.assertEquals(expectedMessage, actualMessage); 
     
     
 }

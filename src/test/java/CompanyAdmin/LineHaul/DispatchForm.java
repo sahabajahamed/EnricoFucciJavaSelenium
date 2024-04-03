@@ -25,6 +25,7 @@ public class DispatchForm {
 	
 	WebDriver driver;
 	String msg = "AVR has been successfully inserted";
+	
 
 // Initializing driver & Closing after task executed
 @BeforeSuite	
@@ -129,7 +130,7 @@ public void SearchByDateDispatch()
 
 	
   @Test
-  public void ShowTableDatabySearch() 
+  public void ShowDispatchTableData() 
   {
 	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
@@ -142,7 +143,8 @@ public void SearchByDateDispatch()
 		WebElement table = driver.findElement(By.xpath("/html/body/main/div/div/div/div[2]/div[2]/div[6]/div/div[2]/table/tbody"));
 		List<WebElement> rows = new ArrayList<WebElement>();
 		rows = table.findElements(By.tagName("tr"));
-		 for (WebElement row : rows) {
+		 for (WebElement row : rows) 
+		 	{
 	            // Get all columns for each row
 	            List<WebElement> columns = row.findElements(By.tagName("td"));
 	            // Iterate through columns

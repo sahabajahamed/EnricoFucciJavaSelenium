@@ -13,6 +13,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import DataFolder.Data;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.bytebuddy.utility.RandomString;
 
@@ -20,7 +21,7 @@ public class Superadmin {
 
     WebDriver driver;
     
-
+    static long RanPhone = Data.getRandomPhoneNumber();
     
 
     @BeforeSuite
@@ -40,7 +41,7 @@ public class Superadmin {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         
-        driver.get("https://dev.groundmetrx.com/masterAdmin/login");
+        driver.get("https://dev-test.groundmetrx.com/masterAdmin/login");
         driver.findElement(By.id("email")).sendKeys("rpr5@getnada.com");
         driver.findElement(By.id("password")).sendKeys("gm@123");
         driver.findElement(By.xpath("//button[@class='btn btnBlue rounded']")).click();
@@ -63,10 +64,10 @@ public class Superadmin {
     {
         driver.findElement(By.xpath("//a[normalize-space()='Companies']")).click();
         driver.findElement(By.id("addCompanyModal")).click();
-        driver.findElement(By.id("name")).sendKeys("Flipkart");
-        driver.findElement(By.id("email")).sendKeys("payd@yopmail.com"); 
-        driver.findElement(By.id("companyAdminUsername")).sendKeys("Comadmin");
-        driver.findElement(By.id("phone")).sendKeys("8563214521");
+        driver.findElement(By.id("name")).sendKeys(Data.RandomCompanyname);
+        driver.findElement(By.id("email")).sendKeys(Data.RandomCompanyEmail + Data.CompanyEmail); 
+        driver.findElement(By.id("companyAdminUsername")).sendKeys(Data.RandomCompanyUsername);
+        driver.findElement(By.id("phone")).sendKeys(Long.toString(RanPhone));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.getElementById('submitCompanyModalBtn').click()");
         

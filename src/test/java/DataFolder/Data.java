@@ -31,7 +31,7 @@ public class Data {
 
 
 
-      // Truck module
+      // Asset module
 ///////////////////////////////////////////////////////////
     public static int getRandomTruckNumber()
     {
@@ -47,5 +47,23 @@ public class Data {
         Random rand3 = new Random();
         return rand3.nextInt(2000,3000); // Adjust range as needed
     }
+
+
+
+
+    //SuperAdmin Company Registeration
+///////////////////////////////////////////////////////
+ public static String RandomCompanyname = RandomStringUtils.randomAlphabetic(8);
+ public static String RandomCompanyEmail = RandomStringUtils.randomAlphabetic(4);
+ public static String CompanyEmail = "@yopmail.com";
+ public static String RandomCompanyUsername = RandomStringUtils.randomAlphabetic(8);
+ 
+ 
+
+
+
+
+
+
     
 }

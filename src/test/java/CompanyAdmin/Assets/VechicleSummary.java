@@ -12,7 +12,11 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+
+
 import DataFolder.Data;
+
+
 
 public class VechicleSummary {
    
@@ -78,7 +82,7 @@ public class VechicleSummary {
 
 
   public static void main(String[] args) {
-    System.out.println(RanTruckYear);
+    System.out.println();
     
   }
 

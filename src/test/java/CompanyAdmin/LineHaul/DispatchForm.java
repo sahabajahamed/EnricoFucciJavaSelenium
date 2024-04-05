@@ -113,7 +113,7 @@ public void AddDispatchviaAdmin()
 
 
 
-@Test
+@Test (invocationCount = 4)
 public void SearchByDateDispatch() 
 {   
    driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();

@@ -65,8 +65,8 @@ public class Superadmin {
         driver.findElement(By.xpath("//a[normalize-space()='Companies']")).click();
         driver.findElement(By.id("addCompanyModal")).click();
         driver.findElement(By.id("name")).sendKeys(Data.RandomCompanyname);
-        driver.findElement(By.id("email")).sendKeys(Data.RandomCompanyEmail + Data.CompanyEmail); 
-        driver.findElement(By.id("companyAdminUsername")).sendKeys(Data.RandomCompanyUsername);
+        driver.findElement(By.id("email")).sendKeys(Data.RandomCompanyUsernameEmail + Data.CompanyEmail); 
+        driver.findElement(By.id("companyAdminUsername")).sendKeys(Data.RandomCompanyUsernameEmail);
         driver.findElement(By.id("phone")).sendKeys(Long.toString(RanPhone));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.getElementById('submitCompanyModalBtn').click()");

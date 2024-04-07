@@ -59,8 +59,8 @@ public class VechicleSummary {
     
 
 
-  @Test
-  public void AddAssets()
+  @Test 
+  public void AddAssets() 
   {
     driver.findElement(By.xpath("//a[normalize-space()='Assets']")).click();
     driver.findElement(By.xpath("//a[normalize-space()='Vehicle Summary']")).click();
@@ -76,6 +76,7 @@ public class VechicleSummary {
     Department.selectByVisibleText("Line Haul");
     Select Ownership = new Select(driver.findElement(By.id("ownership")));
     Ownership.selectByVisibleText("Finance");
+    
 
 
   }

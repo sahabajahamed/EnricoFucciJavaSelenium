@@ -60,7 +60,7 @@ public class TerminalSpot extends Data
 
 
 
-    @Test
+    @Test 
     public void AddTerminal() throws InterruptedException
     {   
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
@@ -80,6 +80,7 @@ public class TerminalSpot extends Data
 		driver.findElement(By.id("phone")).sendKeys(Long.toString(RanPhone));
 
 		driver.findElement(By.xpath("//button[@class='w-100 btn btn-primary']")).click();
+		driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
 		
 		//dhs
     }

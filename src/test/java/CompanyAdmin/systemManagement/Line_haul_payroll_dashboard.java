@@ -1,4 +1,4 @@
-package CompanyAdmin.systemManagement;
+package CompanyAdmin.SystemManagement;
 
 import java.text.CollationElementIterator;
 import java.time.Duration;

@@ -1,5 +1,8 @@
-package SuperAdmin;
+package CheckAlpha;
 
+import java.io.IOException;
+
+import CheckAlpha.Demo;
 
 public class test
 {
@@ -14,6 +17,10 @@ public class test
     }
 
 
+    public void ReadExcelFromOtherMethod() throws IOException
+    {
+      System.out.println(Demo.ReadExcelData());
+    }
 
 }
 
@@ -37,16 +44,17 @@ public class test
     }
 
 
-   public static void main(String[] args) 
+    
+   public static void main(String[] args) throws IOException 
    {
     test an = new test();
-    an.Show();
-    test dg = new Dog();
-    dg.Show(); 
+    an.ReadExcelFromOtherMethod();
+    // test dg = new Dog();
+    // dg.Show(); 
 
-    Dog dg1 = new Dog();
-    dg1.Check("Hello");
-    dg1.Check(500);
+    // Dog dg1 = new Dog();
+    // dg1.Check("Hello");
+    // dg1.Check(500);
 
    }
 

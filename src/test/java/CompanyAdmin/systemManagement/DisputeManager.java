@@ -1,4 +1,4 @@
-package CompanyAdmin.systemManagement;
+package CompanyAdmin.SystemManagement;
 
 public class DisputeManager {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package CompanyAdmin.systemManagement;
+package CompanyAdmin.SystemManagement;
 
 public class Forms {
     public static void main(String[] args) {

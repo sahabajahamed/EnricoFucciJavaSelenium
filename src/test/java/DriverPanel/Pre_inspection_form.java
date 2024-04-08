@@ -33,7 +33,7 @@ public class Pre_inspection_form {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys(" jenifer");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("janderson");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("password");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
    

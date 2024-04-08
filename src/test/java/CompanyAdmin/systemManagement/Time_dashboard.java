@@ -1,4 +1,4 @@
-package CompanyAdmin.systemManagement;
+package CompanyAdmin.SystemManagement;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;

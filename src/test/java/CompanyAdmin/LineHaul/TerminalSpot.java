@@ -33,7 +33,7 @@ public class TerminalSpot extends Data
 	static long RanPhone = Data.getRandomPhoneNumber();
 
 // Initializing driver & Closing after task executed
-@BeforeSuite	
+@BeforeSuite 
 	public void OpenBrowser() 
 	{
         //	ChromeOptions options = new ChromeOptions();
@@ -51,16 +51,22 @@ public class TerminalSpot extends Data
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev-test.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
-		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("DHL@123456");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 		
 
-    }
+   }
+
+   @AfterSuite 
+  public void Closebrowser()
+  {
+	driver.quit();
+  }
 
 
 
-    @Test 
+    @Test
     public void AddTerminal() throws InterruptedException
     {   
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();

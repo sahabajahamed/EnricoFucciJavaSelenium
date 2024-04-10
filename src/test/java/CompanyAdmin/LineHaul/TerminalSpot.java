@@ -66,7 +66,7 @@ public class TerminalSpot extends Data
 
 
 
-    @Test
+    @Test 
     public void AddTerminal() throws InterruptedException
     {   
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();

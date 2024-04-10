@@ -9,6 +9,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+
+
 public class Demo
 {
     String ad;
@@ -24,10 +26,10 @@ public class Demo
         //Creating workbook instance that refers to .xls file
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
 
-         //Creating a Sheet object using the sheet Name
+        //Creating a Sheet object using the sheet Name
         HSSFSheet sheet= wb.getSheet("Sheet1");
 
-         //Create a row object to retrieve row at index 3
+        //Create a row object to retrieve row at index 3
         HSSFRow row =sheet.getRow(3);
         
         //Create a cell object to retreive cell at index 4
@@ -52,7 +54,16 @@ public class Demo
     }
 
 
+
+    public void WriteDataExcel()
+    {
+
+    }
+
      
+
+
+    
     public static void main(String[] args) throws IOException
      {
         Demo d = new Demo();

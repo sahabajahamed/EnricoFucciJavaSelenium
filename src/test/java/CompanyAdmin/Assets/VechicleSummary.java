@@ -45,7 +45,7 @@ public class VechicleSummary {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev-test.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("harrygx");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 	}
@@ -60,7 +60,7 @@ public class VechicleSummary {
 
 
   @Test 
-  public void AddAssets()
+  public void AddAssets() throws InterruptedException
   {
     driver.findElement(By.xpath("//a[normalize-space()='Assets']")).click();
     driver.findElement(By.xpath("//a[normalize-space()='Vehicle Summary']")).click();

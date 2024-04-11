@@ -1,10 +1,16 @@
 package CompanyAdmin.LineHaul;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +27,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 // Importing manual created class for Code-Reusability
 
 import DataFolder.Data;
+import CheckAlpha.*;
 
 
 public class TerminalSpot extends Data
@@ -58,7 +65,7 @@ public class TerminalSpot extends Data
 
    }
 
-   @AfterSuite 
+   @AfterSuite (enabled = false)
   public void Closebrowser()
   {
 	driver.quit();
@@ -67,7 +74,7 @@ public class TerminalSpot extends Data
 
 
     @Test 
-    public void AddTerminal() throws InterruptedException
+    public void AddTerminal() throws InterruptedException, IOException
     {   
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 		driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
@@ -100,6 +107,8 @@ public class TerminalSpot extends Data
 		driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 		driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
 
+		
+		// WebElement table = driver.findElement(By.id("terminals_list_table"));
 		WebElement table = driver.findElement(By.xpath("/html/body/main/div/div/div/div[2]/div[5]/div[1]/div[1]/div[2]/div/table/tbody"));
 		List<WebElement> rows = new ArrayList<WebElement>();
 		rows = table.findElements(By.tagName("tr"));
@@ -120,6 +129,58 @@ public class TerminalSpot extends Data
 	        }
 
 	}
+
+	
+
+
+@Test
+ public void WriteTerminalDataExcel()
+ {
+	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
+	driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
+   
+	// Locate the table element
+	WebElement table = driver.findElement(By.xpath("/html/body/main/div/div/div/div[2]/div[5]/div[1]/div[1]/div[2]/div/table/tbody"));
+
+	// Get all rows from the table
+	List<WebElement> rows = table.findElements(By.tagName("tr"));
+
+	// Create a new Workbook
+	Workbook workbook = new XSSFWorkbook();
+	// Create a Sheet
+	Sheet sheet = workbook.getSheet("TerminalData");
+
+	// Counter for Excel row
+	int rowNum = 1;
+
+	// Iterate through rows
+	for (WebElement row : rows) 
+	{
+		// Create a new Excel row
+		Row excelRow = sheet.createRow(rowNum++);
+		// Get all columns for each row
+		List<WebElement> columns = row.findElements(By.tagName("td"));
+		int colNum = 0;
+		// Iterate through columns
+		for (WebElement column : columns) {
+			// Get the text content of the cell
+			String cellText = column.getText();
+			// Create a new cell in the Excel row and set its value
+			excelRow.createCell(colNum++).setCellValue(cellText);
+		}
+	}
+
+	// Write the workbook content to a file
+	try (FileOutputStream outputStream = new FileOutputStream("src\\test\\java\\DataFolder\\ExcelData\\XlsxData.xlsx")) {
+		workbook.write(outputStream);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+
+	System.out.println("Terminals written on Excel sheet successfully");
+
+
+ }
 
 	
 	

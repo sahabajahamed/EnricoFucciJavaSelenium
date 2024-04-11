@@ -18,7 +18,7 @@ public class Demo
     public  static String ReadExcelData() throws IOException
     {   
         //Create an object of File class to open xlsx file
-        File fl = new File("/Users/untitled/Documents/EnricoFucciJavaSelenium/src/test/java/DataFolder/ExcelData/XlsData.xls"); 
+        File fl = new File("src\\test\\java\\DataFolder\\ExcelData\\XlsData.xls"); 
         
         //Create an object of FileInputStream class to read excel file
         FileInputStream inputStream = new FileInputStream(fl);

@@ -1,12 +1,15 @@
 package CheckAlpha;
 
 import java.io.IOException;
+import java.util.Random;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import CheckAlpha.Demo;
 
 public class test
 {
-    public void Show()
+    public void arrayShow()
     {
         int mark [] = {10,20,30};
 
@@ -17,10 +20,16 @@ public class test
     }
 
 
+
+   
+
+
     public void ReadExcelFromOtherMethod() throws IOException
     {
       System.out.println(Demo.ReadExcelData());
     }
+
+   
 
 }
 

@@ -8,6 +8,13 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import java.util.Random;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
@@ -55,20 +62,16 @@ public class Demo
 
 
 
-    public void WriteDataExcel()
-    {
-
-    }
-
+   
      
 
 
     
     public static void main(String[] args) throws IOException
      {
-        Demo d = new Demo();
-        d.ReadExcelData();
-        d.chk();
+        // Demo d = new Demo();
+        // d.ReadSpecificColumnExcel();
+        
 
      }
    

@@ -1,5 +1,7 @@
 package DataFolder;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -7,7 +9,11 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
@@ -18,6 +24,8 @@ public class Data {
 
     public static String TerminalName = "T";
     public static String RandTerminalStr = RandomStringUtils.randomAlphabetic(4);
+    public static String SpotName = "S";
+    public static String RandSpotStr = RandomStringUtils.randomAlphabetic(4);
     public static String TerminalEmail = "@yopmail.com";
     public static String RandTerminalEmail = RandomStringUtils.randomAlphabetic(4);
     
@@ -25,7 +33,10 @@ public class Data {
     public static int getRandomTerminalNumber()
      {
         Random rand = new Random();
-        return rand.nextInt(10000); // Adjust range as needed
+        int randomNumber1 = rand.nextInt(10000);
+        int randomNumber2 = rand.nextInt(10000);
+
+        return randomNumber1; // Adjust range as needed
     }
     
        
@@ -112,6 +123,66 @@ public class Data {
         
 		
 	}
+
+
+
+                    //Read specific cloumn of Terminal from Excel sheet
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static String ReadSpecificTerminalColumnExcel()
+    {
+        String filePath = "src\\test\\java\\DataFolder\\ExcelData\\XlsxData.xlsx";
+        
+        // Column index from which you want to read random data (0-based index)
+        int columnIndex = 1; // Example: reading from the first column
+
+        try (FileInputStream fis = new FileInputStream(filePath)) {
+            // Create a workbook object
+            Workbook workbook = new XSSFWorkbook(fis);
+
+            // Get the first sheet from the workbook
+            Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
+            
+            // Get the number of rows in the column
+            int numRows = sheet.getLastRowNum() + 1;
+
+            // Create a random number generator
+            Random random = new Random();
+
+            // Generate a random index within the range of the number of rows in the column
+            int randomRowIndex = random.nextInt(numRows);
+
+            // Get the cell at the random row index and specified column index
+            Cell cell = sheet.getRow(randomRowIndex).getCell(columnIndex);
+
+            // Get the cell value as a string
+            String randomData = cell.getStringCellValue();
+
+            // Print the random data
+          //  System.out.println("Random data from column " + columnIndex + " and row " + (randomRowIndex + 1) + ": " + randomData);
+            
+        //   System.out.println(randomData);
+        return randomData;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filePath;
+
+    }
+
+
+
+
+    //Random Origin Location for Routes
+/////////////////////////////////////////////////////////////////////////////////////////////
+public static String RandomOriginArray()
+{
+   String location [] = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District Of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming" };
+   Random randlocation = new Random();
+   int randomIndex = randlocation.nextInt(location.length);
+   return location[randomIndex];
+   //System.out.println("Random Value: " + location[randomIndex]);
+}
 
 
 

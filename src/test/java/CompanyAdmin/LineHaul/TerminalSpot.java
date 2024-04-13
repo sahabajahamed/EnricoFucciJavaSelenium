@@ -12,10 +12,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.idealized.Javascript;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -73,6 +75,8 @@ public class TerminalSpot extends Data
 
 
 
+
+
     @Test 
     public void AddTerminal() throws InterruptedException, IOException
     {   
@@ -95,7 +99,6 @@ public class TerminalSpot extends Data
 		driver.findElement(By.xpath("//button[@class='w-100 btn btn-primary']")).click();
 		driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
 		
-		//dhs
     }
     
 	
@@ -148,7 +151,7 @@ public class TerminalSpot extends Data
 	// Create a new Workbook
 	Workbook workbook = new XSSFWorkbook();
 	// Create a Sheet
-	Sheet sheet = workbook.getSheet("TerminalData");
+	Sheet sheet = workbook.createSheet("TerminalData");
 
 	// Counter for Excel row
 	int rowNum = 1;
@@ -178,12 +181,88 @@ public class TerminalSpot extends Data
 	}
 
 	System.out.println("Terminals written on Excel sheet successfully");
-
-
  }
 
 	
+
+
+
+ @Test
+ public void AddSpot() throws InterruptedException
+ {
+	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
+	driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
+    driver.findElement(By.id("spots-tab")).click(); 
+	driver.findElement(By.linkText("Add New Spot")).click();
+
+	WebElement location = driver.findElement(By.id("spot_address")); //
+		location.sendKeys(RandTerminalStr);
+		Thread.sleep(4000);
+		location.sendKeys(Keys.ARROW_DOWN);
+		location.sendKeys(Keys.ENTER);
+
+	driver.findElement(By.id("spot_number")).sendKeys(Integer.toString(RanTermi));
+	driver.findElement(By.id("spot_name")).sendKeys(SpotName + RandSpotStr);	
+    driver.findElement(By.cssSelector(".col-lg-6:nth-child(3) #email")).sendKeys(RandTerminalEmail + TerminalEmail);
+	driver.findElement(By.cssSelector(".col-lg-6:nth-child(4) #phone")).sendKeys(Long.toString(RanPhone));
+	WebElement HomeTerminal = driver.findElement(By.id("home_terminal"));
+	HomeTerminal.sendKeys(Data.ReadSpecificTerminalColumnExcel());
+	Thread.sleep(4000);
+	HomeTerminal.sendKeys(Keys.ARROW_DOWN);
+	HomeTerminal.sendKeys(Keys.ENTER);
+	// JavascriptExecutor js = (JavascriptExecutor) driver;
+	// js.executeScript("document.getElementById('schedule_priority').click()");
+	driver.findElement(By.xpath("//button[normalize-space()='Add Spot']")).click();
+	driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
+ }
+
+
+
+
+
+ @Test
+ 	public void AddRoute()
+	{
+	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
+	driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
+    driver.findElement(By.id("routes-tab")).click(); 
+	driver.findElement(By.linkText("Add New Route")).click();
+
+	driver.findElement(By.id("origin")).sendKeys(Data.ReadSpecificTerminalColumnExcel()); 
+	driver.findElement(By.id("destination")).sendKeys(Data.ReadSpecificTerminalColumnExcel()); // "RanTermi" can also be used, but it will again give same number. So that's why again called it to get new Random number
+	driver.findElement(By.id("route_display")).sendKeys(RandTerminalStr);
+	driver.findElement(By.id("of_miles")).sendKeys(Integer.toString(Data.getRandomTerminalNumber()));
+	Select originlocation = new Select(driver.findElement(By.id("state")));
+	originlocation.selectByVisibleText(Data.RandomOriginArray());
+	driver.findElement(By.xpath("//button[normalize-space()='Add Route']")).click();
+	driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
+  	}
 	
+
+
+
+@Test
+public void AddEnroute()throws InterruptedException
+{
+	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
+	driver.findElement(By.xpath("//a[text()='Terminals/Spots']")).click();
+    driver.findElement(By.id("enroutes-tab")).click(); 
+	driver.findElement(By.linkText("Add New Enroute")).click();
+
+
+	WebElement location = driver.findElement(By.id("enroute_address")); //
+		location.sendKeys(RandTerminalStr);
+		Thread.sleep(4000);
+		location.sendKeys(Keys.ARROW_DOWN);
+		location.sendKeys(Keys.ENTER);
+	driver.findElement(By.id("enroute_number")).sendKeys(Integer.toString(RanTermi));
+	driver.findElement(By.id("enroute_name")).sendKeys(RandTerminalStr);
+	driver.findElement(By.cssSelector(".col-lg-6:nth-child(3) #email")).sendKeys(RandTerminalEmail + TerminalEmail);
+	driver.findElement(By.id("phone_number")).sendKeys(Long.toString(RanPhone));
+	driver.findElement(By.xpath("//button[normalize-space()='Add Enroute']")).click();
+	driver.findElement(By.xpath("//button[@class='swal2-confirm swal2-styled']")).click();
+}	
+
 
 
 	

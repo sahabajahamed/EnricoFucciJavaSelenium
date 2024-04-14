@@ -31,6 +31,8 @@ public class Data {
     public static String RandSpotStr = RandomStringUtils.randomAlphabetic(4);
     public static String TerminalEmail = "@yopmail.com";
     public static String RandTerminalEmail = RandomStringUtils.randomAlphabetic(4);
+
+    public static String RandomUsername = RandomStringUtils.randomAlphabetic(6);
     
         
     
@@ -215,6 +217,31 @@ public static String RandomDepartmentArray()
 
 }
 
+  //Random Department dropdown data for Employee
+////////////////////////////////////////////////////////////////////////////////////////
+public static String RandomEmployeeDepartmentArray()
+{
+   String Department [] = {"Line Haul","P&D"};
+   Random randomEmployeedepartment = new Random();
+   int rndomIndex = randomEmployeedepartment.nextInt(Department.length);
+   return Department[rndomIndex];
+
+}
+
+
+ //Random Type dropdown data for Employee
+////////////////////////////////////////////////////////////////////////////////////////
+public static String RandomEmployeeTypeArray()
+{
+   String Department [] = {"LH","Spot","P&D"};
+   Random randomEmployeeType = new Random();
+   int rndomIndex = randomEmployeeType.nextInt(Department.length);
+   return Department[rndomIndex];
+
+}
+
+
+
 
 //////////// Random date for calender pick with (mm/dd/yyy) format
 //////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +251,14 @@ public static String RandomDate()
     return s;
 }
 
+
+//////////// Random date FORMAT VERSION for calender pick with (mm-dd-yyy) format in AVR Dispatch
+//////////////////////////////////////////////////////////////////////////////////
+public static String RandomDateFormat()
+{
+    String s = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+    return s;
+}
 
 
 
@@ -303,6 +338,16 @@ public static String ReadSpecificAssetsColumnExcel()
 
 }
 
+
+/////////////// Random Shift Array
+////////////////////////////////////////////////////////////////////////////////////
+public static String RandomShiftArray()
+{
+    String shift [] = {"AM","PM"};
+    Random rndshift = new Random();
+    int rndomIndex = rndshift.nextInt(shift.length);
+   return shift[rndomIndex]; 
+}
 
 
 

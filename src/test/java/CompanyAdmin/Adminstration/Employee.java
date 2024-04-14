@@ -1,8 +1,9 @@
 package CompanyAdmin.Adminstration;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Random;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -39,8 +40,8 @@ public class Employee {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
-		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("DHL@123456");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
    
 }
@@ -57,13 +58,53 @@ public void closedBrowser()
     {        
     driver.findElement(By.xpath("//a[normalize-space()='Administration']")).click();
     driver.findElement(By.xpath(" //a[normalize-space()='Employees']")).click();
+    driver.findElement(By.xpath("//a[@data-bs-target='#ProfileUpdateModal']")).click();
 
-    driver.findElement(By.xpath("(//a[normalize-space()='Add Driver'])[1]")).click();
     driver.findElement(By.id("driver_id")).sendKeys(Integer.toString(RndFedex));
     driver.findElement(By.id("password")).sendKeys(Integer.toString(RndFedex));
     driver.findElement(By.id("first_name")).sendKeys(Data.RandTerminalStr);
-    driver.findElement(By.id("last_name")).sendKeys(Data.RandTerminalStr);
-    driver.findElement(By.id("usernameInputSec")).sendKeys(Data.RandTerminalStr);
+    driver.findElement(By.id("last_name")).sendKeys(Data.RandSpotStr);
+    driver.findElement(By.id("usernameInputSec")).sendKeys(Data.RandomUsername);
+    driver.findElement(By.id("manager_name")).sendKeys("null");
+    driver.findElement(By.id("phone")).sendKeys(Long.toString(Data.getRandomPhoneNumber()));
+    driver.findElement(By.id("home_terminal")).sendKeys(Data.ReadSpecificTerminalColumnExcel());
+    driver.findElement(By.name("department")).sendKeys(Data.RandomEmployeeDepartmentArray());
+    driver.findElement(By.id("card_expiration")).sendKeys(Data.RandomDate());
+    driver.findElement(By.id("driver_type")).sendKeys(Data.RandomEmployeeTypeArray());
+    driver.findElement(By.id("license_expiration")).sendKeys(Data.RandomDate());
+    Select shift = new Select(driver.findElement(By.id("shift_time")));
+    shift.selectByVisibleText(Data.RandomShiftArray());
+
+
+    ///////// Getting Value of Entity from web & using it as input
+    ////////////////////////////////////////////////////////////////////////////////
+    WebElement dropdown = driver.findElement(By.name("entity_id"));
+
+        // Get all options from the dropdown
+        List<WebElement> options = dropdown.findElements(By.tagName("option"));
+
+        // Create a list to store dropdown values
+        List<String> dropdownValues = new ArrayList<>();
+
+        // Add each option's text to the dropdownValues list
+        for (WebElement option : options) {
+            dropdownValues.add(option.getText());
+        }
+
+        // Generate a random index to select a random value from the dropdownValues list
+        Random random = new Random();
+        int randomIndex = random.nextInt(dropdownValues.size());
+
+        // Get the random value from the dropdownValues list
+        String randomValue = dropdownValues.get(randomIndex);
+
+
+    driver.findElement(By.id("entity_id")).sendKeys(randomValue);    
+
+
+
+
+
         
     }
 

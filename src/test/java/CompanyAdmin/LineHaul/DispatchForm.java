@@ -46,12 +46,12 @@ public class DispatchForm {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
 		driver.get("https://dev-test.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("DHL");
-		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("DHL@123456");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
 	}
 	
-@AfterSuite 
+@AfterSuite (enabled = false)
   public void Closebrowser()
   {
 	driver.quit();
@@ -63,26 +63,30 @@ public class DispatchForm {
 
 
 @Test 
-public void AddDispatchviaAdmin() 
+public void AddDispatchviaAdmin() throws InterruptedException 
 {
 	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Add New Record']")).click();
-	driver.findElement(By.id("created_date")).sendKeys(Data.RandomDate());
-	driver.findElement(By.name("created_time")).sendKeys(Data.RandomTime());           
-	driver.findElement(By.name("driver_name")).sendKeys("James Anderson");   //Dynamic data
-	driver.findElement(By.xpath("//div[@class='ui-menu-item-wrapper' and text()='James Anderson']")).click();       //Dynamic data
+	driver.findElement(By.id("created_date")).sendKeys(Data.RandomDateFormat());
+	driver.findElement(By.name("created_time")).sendKeys(Data.RandomTime()); 
+	
+	WebElement employee = driver.findElement(By.name("driver_name")); //
+	employee.sendKeys("James Anderson");
+	Thread.sleep(4000);
+	employee.sendKeys(Keys.ARROW_DOWN);
+	employee.sendKeys(Keys.ENTER);
 	
 	driver.findElement(By.id("tractor_number")).sendKeys(Data.ReadSpecificAssetsColumnExcel());///////////////////Dynamic data
 	
-	driver.findElement(By.id("dispatch_from")).sendKeys("21");
+	driver.findElement(By.id("dispatch_from")).sendKeys(Data.ReadSpecificTerminalColumnExcel());
 		Select DFs = new Select(driver.findElement(By.id("dispatch_from_type")));
 	DFs.selectByVisibleText("Terminal");                ///////////////////////////Dynamic data
 	
 	
-	driver.findElement(By.id("dispatch_to")).sendKeys("55");
+	driver.findElement(By.id("dispatch_to")).sendKeys(Data.ReadSpecificTerminalColumnExcel());
 	Select DTs = new Select(driver.findElement(By.id("dispatch_to_type")));
-	DTs.selectByVisibleText("Spot");                /////////////////////////////Dynamic data
+	DTs.selectByVisibleText("Terminal");                /////////////////////////////Dynamic data
 	
 	
 	driver.findElement(By.name("trailer_1")).sendKeys("1245");

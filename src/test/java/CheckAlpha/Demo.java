@@ -4,6 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -62,6 +69,18 @@ public class Demo
 
 
 
+    @SuppressWarnings("deprecation")
+    public void RandomName() throws IOException
+    {
+    URL url = new URL("https://api.api-ninjas.com/v1/randomuser");
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestProperty("accept", "application/json");
+    InputStream responseStream = connection.getInputStream();
+    ObjectMapper mapper = new ObjectMapper();
+    JsonNode root = mapper.readTree(responseStream);
+    System.out.println(root.path("fact").asText());
+
+    }
    
      
 
@@ -69,8 +88,8 @@ public class Demo
     
     public static void main(String[] args) throws IOException
      {
-        // Demo d = new Demo();
-        // d.ReadSpecificColumnExcel();
+        Demo d = new Demo();
+        d.RandomName();
         
 
      }

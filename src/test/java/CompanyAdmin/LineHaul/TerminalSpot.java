@@ -75,7 +75,8 @@ public class TerminalSpot extends Data
 
 
 
-
+  // Add New Terminal
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Test 
     public void AddTerminal() throws InterruptedException, IOException
@@ -103,7 +104,8 @@ public class TerminalSpot extends Data
     
 	
     
-
+	///////////////  Show Terminal list in console here in VScode 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Test
 	public void ShowTerminalData()
 	{
@@ -135,6 +137,10 @@ public class TerminalSpot extends Data
 
 	
 
+
+
+	///////////////  Write existing Terminal data from Web to Excel to reuse it later
+//////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 @Test
  public void WriteTerminalDataExcel()

@@ -18,12 +18,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
+import DataFolder.Data;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Employee {
      WebDriver driver;
 	
+     static Integer RndFedex = Data.RandomFedexID(); 
 
 // Initializing driver & Closing after task executed
 @BeforeMethod	
@@ -43,11 +44,37 @@ public class Employee {
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
    
 }
-@AfterMethod
+@AfterMethod (enabled = false)
 public void closedBrowser()
 {
     driver.quit();
 }
+
+
+
+@Test
+    public void AddEmployee()
+    {        
+    driver.findElement(By.xpath("//a[normalize-space()='Administration']")).click();
+    driver.findElement(By.xpath(" //a[normalize-space()='Employees']")).click();
+
+    driver.findElement(By.xpath("(//a[normalize-space()='Add Driver'])[1]")).click();
+    driver.findElement(By.id("driver_id")).sendKeys(Integer.toString(RndFedex));
+    driver.findElement(By.id("password")).sendKeys(Integer.toString(RndFedex));
+    driver.findElement(By.id("first_name")).sendKeys(Data.RandTerminalStr);
+    driver.findElement(By.id("last_name")).sendKeys(Data.RandTerminalStr);
+    driver.findElement(By.id("usernameInputSec")).sendKeys(Data.RandTerminalStr);
+        
+    }
+
+
+
+
+
+
+
+
+
 //div[@id='activetab']//div[@class='common-listing-table']//tr/th[2]
 @Test
 public void employeeFedEX_Id_Sorting()

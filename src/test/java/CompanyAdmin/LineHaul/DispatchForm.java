@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
+import DataFolder.Data;
 
 public class DispatchForm {
 	
@@ -68,13 +68,12 @@ public void AddDispatchviaAdmin()
 	driver.findElement(By.xpath("//a[normalize-space()='Line Haul']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Dispatch Form']")).click();
 	driver.findElement(By.xpath("//a[normalize-space()='Add New Record']")).click();
-	driver.findElement(By.id("created_date")).click();
-	driver.findElement(By.xpath("//a[@data-date='22']")).click();//////////////Dynamic data
-	driver.findElement(By.name("created_time")).sendKeys("16:00");           //Dynamic data
+	driver.findElement(By.id("created_date")).sendKeys(Data.RandomDate());
+	driver.findElement(By.name("created_time")).sendKeys(Data.RandomTime());           
 	driver.findElement(By.name("driver_name")).sendKeys("James Anderson");   //Dynamic data
 	driver.findElement(By.xpath("//div[@class='ui-menu-item-wrapper' and text()='James Anderson']")).click();       //Dynamic data
 	
-	driver.findElement(By.id("tractor_number")).sendKeys("2323");///////////////////Dynamic data
+	driver.findElement(By.id("tractor_number")).sendKeys(Data.ReadSpecificAssetsColumnExcel());///////////////////Dynamic data
 	
 	driver.findElement(By.id("dispatch_from")).sendKeys("21");
 		Select DFs = new Select(driver.findElement(By.id("dispatch_from_type")));

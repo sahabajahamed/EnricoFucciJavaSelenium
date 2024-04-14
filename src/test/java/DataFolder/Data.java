@@ -2,6 +2,9 @@ package DataFolder;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +31,8 @@ public class Data {
     public static String RandSpotStr = RandomStringUtils.randomAlphabetic(4);
     public static String TerminalEmail = "@yopmail.com";
     public static String RandTerminalEmail = RandomStringUtils.randomAlphabetic(4);
+    
+        
     
     
     public static int getRandomTerminalNumber()
@@ -62,7 +67,7 @@ public class Data {
     public static int getRandomTruckYear()
     {
         Random rand3 = new Random();
-        return rand3.nextInt(2000,3000); // Adjust range as needed
+        return rand3.nextInt(2000,2053); // Adjust range as needed
     }
 
 
@@ -80,7 +85,7 @@ public class Data {
 
 
 
-           //Specific data from terminal
+           // Read & show Specific column data from Web to console in VScode
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -113,20 +118,18 @@ public class Data {
         int randomIndex = random.nextInt(rows.size() - 1) + 1; // Exclude the header row
 
         // Get the specific cell (data) in the column at the randomly generated index
-       WebElement randomCell = rows.get(randomIndex).findElements(By.tagName("td")).get(columnIndex);
-
-       
+       WebElement randomCell = rows.get(randomIndex).findElements(By.tagName("td")).get(columnIndex); 
 
         // Print the selected random data
-        System.out.println("Randomly selected data from column " + columnIndex + ": " + randomCell.getText());
-        
-        
+        System.out.println("Randomly selected data from column " + columnIndex + ": " + randomCell.getText());       
 		
 	}
 
 
 
-                    //Read specific cloumn of Terminal from Excel sheet
+
+
+                    //Read specific column of Terminal from Excel sheet
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static String ReadSpecificTerminalColumnExcel()
@@ -186,6 +189,119 @@ public static String RandomOriginArray()
 
 
 
+
+    //Random Ownership dropdown data for Assets
+////////////////////////////////////////////////////////////////////////////////////////
+ public static String RandomOwnershipArray()
+ {
+    String Ownership [] = {"Finance","Lease","Paid Off"};
+    Random randomownership = new Random();
+    int rndomIndex = randomownership.nextInt(Ownership.length);
+    return Ownership[rndomIndex];
+ }
+
+
+
+
+
+   //Random Department dropdown data for Assets
+////////////////////////////////////////////////////////////////////////////////////////
+public static String RandomDepartmentArray()
+{
+   String Department [] = {"Line Haul","P&D NY","P&D NJ"};
+   Random randomdepartment = new Random();
+   int rndomIndex = randomdepartment.nextInt(Department.length);
+   return Department[rndomIndex];
+
+}
+
+
+//////////// Random date for calender pick with (mm/dd/yyy) format
+//////////////////////////////////////////////////////////////////////////////////
+public static String RandomDate()
+{
+    String s = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+    return s;
+}
+
+
+
+
+//////////// Random Time for calender pick with (mm/dd/yyy) format
+//////////////////////////////////////////////////////////////////////////////////
+public static String RandomTime()
+{
+    String s = new SimpleDateFormat("HH:mm").format(new Date());
+    return s;
+}
+
+
+
+
+//////////// Random VIN for Truck
+//////////////////////////////////////////////////////////////////////////////////
+public static long RandomVIN()
+{
+    Random rndVIN = new Random();
+   return rndVIN.nextLong(100000000000000000L);
+}
+
+
+
+////// Random FEDEX id for Employees
+//////////////////////////////////////////////////////////////////////////////
+public static Integer RandomFedexID()
+{
+    Random rndfedex = new Random();
+    return rndfedex.nextInt(10000000);
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+ //Read specific column of Assets from Excel sheet
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public static String ReadSpecificAssetsColumnExcel()
+{
+    String filePath = "src\\test\\java\\DataFolder\\ExcelData\\AssetsXlsxData.xlsx";
+    
+    // Column index from which you want to read random data (0-based index)
+    int columnIndex = 1; // Example: reading from the first column
+
+    try (FileInputStream fis = new FileInputStream(filePath)) {
+        // Create a workbook object
+        Workbook workbook = new XSSFWorkbook(fis);
+
+        // Get the first sheet from the workbook
+        Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
+        
+        // Get the number of rows in the column
+        int numRows = sheet.getLastRowNum() + 1;
+
+        // Create a random number generator
+        Random random = new Random();
+
+        // Generate a random index within the range of the number of rows in the column
+        int randomRowIndex = random.nextInt(numRows);
+
+        // Get the cell at the random row index and specified column index
+        Cell cell = sheet.getRow(randomRowIndex).getCell(columnIndex);
+
+        // Get the cell value as a string
+        String randomData = cell.getStringCellValue();
+
+        // Print the random data
+      //  System.out.println("Random data from column " + columnIndex + " and row " + (randomRowIndex + 1) + ": " + randomData);
+        
+    //   System.out.println(randomData);
+    return randomData;
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return filePath;
+
+}
 
 
 

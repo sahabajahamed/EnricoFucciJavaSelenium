@@ -136,7 +136,7 @@ public class Data {
 
     public static String ReadSpecificTerminalColumnExcel()
     {
-        String filePath = "src\\test\\java\\DataFolder\\ExcelData\\XlsxData.xlsx";
+        String filePath = "src/test/java/DataFolder/ExcelData/XlsxData.xlsx";
         
         // Column index from which you want to read random data (0-based index)
         int columnIndex = 1; // Example: reading from the first column

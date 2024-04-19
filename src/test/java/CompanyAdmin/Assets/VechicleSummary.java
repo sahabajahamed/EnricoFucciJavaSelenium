@@ -152,7 +152,7 @@ public class VechicleSummary {
 	}
 
 	// Write the workbook content to a file
-	try (FileOutputStream outputStream = new FileOutputStream("src\\test\\java\\DataFolder\\ExcelData\\AssetsXlsxData.xlsx")) {
+	try (FileOutputStream outputStream = new FileOutputStream("src/test/java/DataFolder/ExcelData/XlsxData.xlsx")) {
 		workbook.write(outputStream);
 	} catch (IOException e) {
 		e.printStackTrace();

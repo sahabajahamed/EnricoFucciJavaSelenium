@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+	
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -90,6 +91,7 @@ public class TerminalSpot extends Data
 		Thread.sleep(4000);
 		location.sendKeys(Keys.ARROW_DOWN);
 		location.sendKeys(Keys.ENTER);
+		
 
 		driver.findElement(By.id("terminal_number")).sendKeys(Integer.toString(RanTermi));
 		driver.findElement(By.id("terminal_name")).sendKeys(TerminalName + RandTerminalStr); 

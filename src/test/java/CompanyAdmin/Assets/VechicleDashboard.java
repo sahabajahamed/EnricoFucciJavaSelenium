@@ -17,6 +17,7 @@ import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 
@@ -27,7 +28,7 @@ public class VechicleDashboard {
 	
 
 // Initializing driver & Closing after task executed
-@BeforeMethod	
+@BeforeSuite	
 	public void OpenBrowser() 
 	{
 
@@ -44,6 +45,7 @@ public class VechicleDashboard {
 		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
    
 }
+
 @AfterMethod
 public void closedBrowser()
 {

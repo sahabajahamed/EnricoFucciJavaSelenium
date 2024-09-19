@@ -4,14 +4,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,7 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Data {
 
-   static WebDriver driver;
+    WebDriver driver ;
 
     public static String TerminalName = "T";
     public static String RandTerminalStr = RandomStringUtils.randomAlphabetic(4);
@@ -35,6 +41,28 @@ public class Data {
     public static String RandomUsername = RandomStringUtils.randomAlphabetic(6);
     
         
+
+    public void StartBrowser()
+    {
+        // ChromeOptions options = new ChromeOptions();
+	// options.addArguments("--headless");
+	
+		// WebDriverManager.safaridriver().setup();
+		// driver = new SafariDriver();	
+
+
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+
+
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	
+		driver.get("https://dev-test.groundmetrx.com/company/login");
+		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
+		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
+    }
     
     
     public static int getRandomTerminalNumber()

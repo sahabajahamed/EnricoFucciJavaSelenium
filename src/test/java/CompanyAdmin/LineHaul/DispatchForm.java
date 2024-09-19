@@ -23,32 +23,19 @@ import DataFolder.Data;
 
 public class DispatchForm {
 	
-	WebDriver driver;
+	
 	String msg = "AVR has been successfully inserted";
 	
+	WebDriver driver ;
+
 
 // Initializing driver & Closing after task executed
 @BeforeSuite	
 	public void OpenBrowser() 
 	{
-	// ChromeOptions options = new ChromeOptions();
-	// options.addArguments("--headless");
-	
-		// WebDriverManager.safaridriver().setup();
-		// driver = new SafariDriver();	
-
-
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	
-		driver.get("https://dev-test.groundmetrx.com/company/login");
-		driver.findElement(By.xpath("//input[@placeholder='Enter your username']")).sendKeys("qademo");
-		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("12345678");
-		driver.findElement(By.xpath("//button[@class='btn full-btn']")).sendKeys(Keys.RETURN);
+		
+	   Data dt = new Data();
+	   dt.StartBrowser();
 	}
 	
 @AfterSuite (enabled = false)
